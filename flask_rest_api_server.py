@@ -1,5 +1,6 @@
 from flask import Flask, Response, request
 from pprint import pprint
+import time
 
 app = Flask(__name__)
 
@@ -11,6 +12,9 @@ def welcome():
     return 'Hello', 200, {'Content-Type': 'text/plain'}
     #return Response('Hello', mimetype='text/plain')
     
+@app.route('/now')
+def time_service():
+    return time.ctime(), 200, {'Content-Type': 'text/plain'}
 
 if __name__ == '__main__':
     app.run(debug=True)
