@@ -1,7 +1,9 @@
 from bottle import *
+from pprint import pprint
 
 @route('/')
 def welcome():
+    pprint(dict(request.headers))
     response.content_type = 'text/plain'
     return 'Hello'
 
