@@ -16,5 +16,9 @@ def welcome():
 def time_service():
     return time.ctime(), 200, {'Content-Type': 'text/plain'}
 
+@app.route('/upper/<word>')
+def upper_case_service(word):
+    return word.upper(), 200, {'Content-Type': 'text/plain'}
+
 if __name__ == '__main__':
     app.run(debug=True)

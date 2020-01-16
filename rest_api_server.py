@@ -16,6 +16,11 @@ def time_service():
     response.content_type = 'text/plain'
     return time.ctime()
 
+@route('/upper/<word>')
+def upper_case_service(word):
+    response.content_type = 'text/plain'
+    return word.upper()
+
 if __name__ == '__main__':
 
     run(host='localhost', port=8080)
