@@ -27,6 +27,7 @@ def upper_case_service(word):
 @route('/area/circle')
 def circle_area_service():
     pprint(dict(request.query))
+    response.set_cookie('last-visit', time.ctime())
     try:
         radius = float(request.query.get('radius', '0.0'))
     except ValueError as e:
