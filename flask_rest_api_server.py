@@ -1,6 +1,7 @@
 from flask import Flask, Response, request
 from pprint import pprint
 import time
+import algebra
 
 app = Flask(__name__)
 
@@ -28,7 +29,10 @@ def circle_area_service():
         radius = float(request.args.get('radius', '0.0'))
     except ValueError as e:
         return e.args[0]
-    return f'Test: {radius}'
+    area = algebra.area_circle(radius)
+    if 'text/html' in request.headers.get('Accept', '*/*'):
+        return f'<p> The area is <em> {area} </em> </p>', 200, {'Content-Type': 'text/html'}
+    return dict(radius=radius, area=area, service=request.path)
 
 if __name__ == '__main__':
     app.run(debug=True)

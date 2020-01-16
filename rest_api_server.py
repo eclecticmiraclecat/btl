@@ -31,7 +31,12 @@ def circle_area_service():
         radius = float(request.query.get('radius', '0.0'))
     except ValueError as e:
         return e.args[0]
-    return f'Test: {radius}'
+    area = algebra.area_circle(radius)
+    if 'text/html' in request.headers.get('Accept', '*/*'):
+        response.content_type = 'text/html'
+        return f'<p> The area is <em> {area} </em> </p>'
+    return dict(radius=radius, area=area, service=request.path)
+
 
 if __name__ == '__main__':
 
