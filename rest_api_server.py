@@ -22,13 +22,16 @@ def upper_case_service(word):
     response.content_type = 'text/plain'
     return word.upper()
 
+# never trust a cookie that came from a user, cookies are easily spoofed
+secretword = 'very secret'
+
 # query is passed through ?, http://localhost:8080/area/circle?radius=10
 # handle 500 error when query wrong type, http://localhost:8080/area/circle?radius=xyz
 @route('/area/circle')
 def circle_area_service():
     last_visit = request.get_cookie('last-visit', 'unknown')
     print(f'Last visit {last_visit}')
-    response.set_cookie('last-visit', time.ctime())
+    response.set_cookie('last-visit', time.ctime(), secret=secretword)
     try:
         radius = float(request.query.get('radius', '0.0'))
     except ValueError as e:
