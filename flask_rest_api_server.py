@@ -24,7 +24,10 @@ def upper_case_service(word):
 @app.route('/area/circle')
 def circle_area_service():
     pprint(dict(request.args))
-    radius = float(request.args.get('radius', '0.0'))
+    try:
+        radius = float(request.args.get('radius', '0.0'))
+    except ValueError as e:
+        return e.args[0]
     return f'Test: {radius}'
 
 if __name__ == '__main__':

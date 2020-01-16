@@ -23,12 +23,16 @@ def upper_case_service(word):
     return word.upper()
 
 # query is passed through ?, http://localhost:8080/area/circle?radius=10
+# handle 500 error when query wrong type, http://localhost:8080/area/circle?radius=xyz
 @route('/area/circle')
 def circle_area_service():
     pprint(dict(request.query))
-    radius = float(request.query.get('radius', '0.0'))
+    try:
+        radius = float(request.query.get('radius', '0.0'))
+    except ValueError as e:
+        return e.args[0]
     return f'Test: {radius}'
 
 if __name__ == '__main__':
 
-    run(host='localhost', port=8080)
+    run(host='localhost', port=8080, reloader=True)
