@@ -22,6 +22,7 @@ def upper_case_service(word):
     return word.upper(), 200, {'Content-Type': 'text/plain'}
 
 # query is passed through ?, http://localhost:8080/area/circle?radius=10
+# handle 500 error when query wrong type, http://localhost:8080/area/circle?radius=xyz
 @app.route('/area/circle')
 def circle_area_service():
     pprint(dict(request.args))
