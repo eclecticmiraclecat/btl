@@ -29,7 +29,7 @@ secretword = 'very secret'
 # handle 500 error when query wrong type, http://localhost:8080/area/circle?radius=xyz
 @route('/area/circle')
 def circle_area_service():
-    last_visit = request.get_cookie('last-visit', 'unknown')
+    last_visit = request.get_cookie('last-visit', 'unknown', secret=secretword)
     print(f'Last visit {last_visit}')
     response.set_cookie('last-visit', time.ctime(), secret=secretword)
     try:
