@@ -26,7 +26,8 @@ def upper_case_service(word):
 # handle 500 error when query wrong type, http://localhost:8080/area/circle?radius=xyz
 @route('/area/circle')
 def circle_area_service():
-    pprint(dict(request.query))
+    last_visit = request.get_cookie('last-visit', 'unknown')
+    print(f'Last visit {last_visit}')
     response.set_cookie('last-visit', time.ctime())
     try:
         radius = float(request.query.get('radius', '0.0'))
