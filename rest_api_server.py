@@ -1,6 +1,7 @@
 from bottle import *
 from pprint import pprint
 import time
+import algebra
 
 @route('/')
 def welcome():
@@ -20,6 +21,12 @@ def time_service():
 def upper_case_service(word):
     response.content_type = 'text/plain'
     return word.upper()
+
+# query is passed through ?, http://localhost:8080/area/circle?radius=10
+@route('/area/circle')
+def circle_area_service():
+    pprint(dict(request.query))
+    return 'Test'
 
 if __name__ == '__main__':
 
